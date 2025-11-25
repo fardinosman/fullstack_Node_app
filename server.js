@@ -9,10 +9,11 @@ import {sendResponse} from './utils/sendResponse.js';
 import  {getData} from './utils/getData.js';
 import { handleGet } from './handlers/routeHandlers.js';
 import { handlePost } from './handlers/routeHandlers.js';
+import sanitizeHtml from "sanitize-html";
 
 
 const PORT = 8000;
-
+const USERS = [{ username: 'far', password: 'secret123' }];
 const __dirname =  import.meta.dirname;
 
 const server = http.createServer( async (req, res) => {
@@ -67,3 +68,4 @@ server.listen(PORT, () => {
 // //  }
 
       
+  

@@ -8,7 +8,7 @@ export async function serveStatic(req, res, baseDir) {
   const publicDir = path.join(baseDir, 'public')
   const filePath = path.join(
     publicDir,
-    req.url === '/' ? 'index.html' : req.url
+    req.url === '/' ? 'login.html' : req.url
   )
 
   const ext = path.extname(filePath)
