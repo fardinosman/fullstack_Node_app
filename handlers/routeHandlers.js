@@ -4,6 +4,7 @@ import { parseJSONbody } from "../utils/parseJSONbody.js";
 import {addNewSighting} from "../utils/addNewSighting.js";
 import { sanitizeInput } from "../utils/sanitizeInput.js";
 import { sightingEvents } from "../utils/sightingEvent.js";   
+import { stories } from "../data/stories.js";
 
 
 //HandleGet
@@ -41,4 +42,23 @@ export async function loginUser(req, res) {
         console.error('Error handling login request:', err);
         sendResponse(res, 500, 'application/json', JSON.stringify({ message: 'Login failed' }));   
     }
+}
+
+export async function handleNews(req,res){
+     res.statusCode = 200
+        res.setHeader('Content-Type', 'text/event-stream')
+        res.setHeader('Cache-Control', 'no-cache')
+        res.setHeader('Connection', 'keep-alive')
+
+
+    setInterval(() => {
+        let randomIndex = Math.floor(Math.random()*stories.length)
+
+          res.write(`data: ${JSON.stringify( {event: 'news-update',story: stories[randomIndex]}
+
+     )}\n\n`) 
+    },3000)
+
+   
+
 }

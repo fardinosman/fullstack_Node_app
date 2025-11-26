@@ -10,6 +10,7 @@ import  {getData} from './utils/getData.js';
 import { handleGet } from './handlers/routeHandlers.js';
 import { handlePost } from './handlers/routeHandlers.js';
 import sanitizeHtml from "sanitize-html";
+import {handleNews} from './handlers/routeHandlers.js';
 
 
 const PORT = 8000;
@@ -26,10 +27,13 @@ const server = http.createServer( async (req, res) => {
       handlePost (req, res);  
     
     }  
-
   
-  }
- 
+  } 
+  else if(req.url === '/api/news')
+    {
+      return await handleNews(req,res)
+    }
+
   else if(!req.url.startsWith('/api')){
   return await serveStatic(req, res, __dirname);
  }  
